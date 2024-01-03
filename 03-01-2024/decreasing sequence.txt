@@ -1,0 +1,14 @@
+https://www.geeksforgeeks.org/problems/decreasing-sequence2722/1
+
+ public long minMoves(long arr[], long n, long k) {
+        long count = 0;
+        long mod = (long) 1e9 + 7;
+        for (int i = 1; i < n; i++) {
+            if (arr[i] > arr[i - 1]) {
+                long steps = (long) Math.ceil((double) (arr[i] - arr[i - 1]) / k);
+                count = count % mod + steps ;
+                arr[i] -= steps * k;
+            }
+        }
+        return count % mod;
+    }

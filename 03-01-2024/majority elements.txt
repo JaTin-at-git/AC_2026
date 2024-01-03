@@ -1,0 +1,17 @@
+https://leetcode.com/problems/majority-element/
+
+    public int majorityElement(int[] arr) {
+        int me = arr[0];
+        int count = 0;
+
+        for (int el : arr) {
+            if (el == me) count++;
+            else count--;
+            if (count < 0) {
+                me = el;
+                count = 1;
+            }
+        }
+
+        return me;
+    }

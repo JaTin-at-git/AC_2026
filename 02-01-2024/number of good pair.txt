@@ -1,0 +1,9 @@
+https://leetcode.com/problems/number-of-good-pairs/ 
+
+ public int numIdenticalPairs(int[] nums) {
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int num : nums) map.put(num, map.getOrDefault(num, 0) + 1);
+        int total = 0;
+        for (int n : map.values()) total += (n * (n - 1) / 2);
+        return total;
+    }

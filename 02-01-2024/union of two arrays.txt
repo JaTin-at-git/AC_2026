@@ -1,0 +1,9 @@
+https://www.geeksforgeeks.org/problems/union-of-two-arrays3538/1
+
+  public static int doUnion(int a[], int n, int b[], int m) 
+    {
+        Set<Integer> union = new HashSet<>();
+        for (int el : a) union.add(el);
+        for (int el : b) union.add(el);
+        return union.size();
+    }
