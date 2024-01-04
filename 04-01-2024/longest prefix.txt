@@ -1,0 +1,18 @@
+https://leetcode.com/problems/longest-common-prefix/submissions/
+
+class Solution {
+    public String longestCommonPrefix(String[] strs) {
+          if (strs.length == 0) return "";
+        int eIdx = strs[0].length() - 1;
+        for (String el : strs) {
+            eIdx = Math.min(eIdx,el.length()-1);
+            for (int i = 0; i <= eIdx; i++) {
+                if (el.charAt(i) != strs[0].charAt(i)) {
+                    eIdx = Math.min(eIdx, i-1);
+                    break;
+                }
+            }
+        }
+        return eIdx<0?"":strs[0].substring(0,eIdx+1);
+    }
+}
