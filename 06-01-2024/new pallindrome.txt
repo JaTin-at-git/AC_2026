@@ -1,0 +1,21 @@
+https://codeforces.com/problemset/problem/1832/A
+
+import java.util.*;
+
+public class Main {
+
+    public static boolean isNewPallindromic(String word) {
+        Map<Character, Integer> map = new HashMap<>();
+        for (char ch : word.toCharArray())
+            map.put(ch, map.getOrDefault(ch, 0) + 1);
+        return map.values().stream().filter(v -> v >= 2).count() >= 2;
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        while (n-- > 0) {
+            System.out.println(isNewPallindromic(scanner.next()) ? "YES" : "NO");
+        }
+    }
+}

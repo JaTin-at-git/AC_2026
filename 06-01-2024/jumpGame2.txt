@@ -1,0 +1,22 @@
+https://leetcode.com/problems/jump-game-ii/
+
+class Solution {
+    public int jump(int[] arr) {
+        if (arr.length == 1) return 0;
+
+        int jumps = 0;
+        int maxReachable = 0;
+        int currentMax = 0;
+
+        for (int i = 0; i <= maxReachable && i < arr.length; i++) {
+            currentMax = Math.max(currentMax, i + arr[i]);
+            if (i == maxReachable && currentMax > maxReachable) {
+                    maxReachable = currentMax;
+                    jumps++;
+                }
+//            System.out.printf("For %d, maxReachable: %d, and cuurentMax: %d\n",arr[i],maxReachable,currentMax);
+            if (maxReachable>=arr.length-1) return jumps;
+        }
+        return -1;
+    }
+}

@@ -1,0 +1,25 @@
+https://codeforces.com/contest/1829/problem/A
+
+import java.util.*;
+ 
+public class Main {
+    public static int getDiff(String str) {
+        int count = 0;
+        final String reference = "codeforces";
+        for (int i = 0; i < reference.length() && i < str.length(); i++) {
+            if (str.charAt(i) != reference.charAt(i)) {
+                count++;
+            }
+        }
+ 
+        return count+Math.abs(reference.length()-str.length());
+    }
+ 
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        while (n-- > 0) {
+            System.out.println(getDiff(scanner.next()));
+        }
+    }
+}
