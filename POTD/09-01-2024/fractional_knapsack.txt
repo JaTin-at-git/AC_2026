@@ -1,0 +1,18 @@
+https://www.geeksforgeeks.org/problems/fractional-knapsack-1587115620/1
+
+double fractionalKnapsack(int W, Item arr[], int n) {
+        Arrays.sort(arr, (b, a) -> Double.compare(a.value / (a.weight * 1.0), b.value / (b.weight * 1.0))); //O(nlog(n))
+        int i = 0;
+        double taken = 0;
+        while (W > 0 && i < n) {
+            if (arr[i].weight <= W) {
+                taken += arr[i].value;
+                W -= arr[i].weight;
+            } else {
+                taken += arr[i].value / (arr[i].weight * 1.0) * W;
+                break;
+            }
+            i++;
+        }
+        return taken;
+    }
