@@ -1,0 +1,28 @@
+//kinda liking such problems :D
+//https://codeforces.com/problemset/problem/1768/B
+//time: O(n)
+//spcae: O(1)
+
+import java.util.Scanner;
+
+public class Main {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int numTests = scanner.nextInt();
+
+        for (int i = 0; i < numTests; i++) {
+            int n = scanner.nextInt();
+            int k = scanner.nextInt();
+            int sortedTill = 0;
+            for (int j = 0; j < n; j++) {
+                if (scanner.nextInt()==sortedTill+1)
+                    sortedTill++;
+            }
+            System.out.println(Math.ceilDiv(n-sortedTill,k));
+        }
+
+        scanner.close();
+    }
+
+}
