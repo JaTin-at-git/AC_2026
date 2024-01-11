@@ -1,0 +1,37 @@
+//https://codeforces.com/problemset/problem/978/B
+//time: O(n)
+//space: O(1)
+
+import java.util.Scanner;
+
+public class Main {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int tcs = scanner.nextInt();
+
+        for (int i = 0; i < tcs; i++) {
+            int codes[] = new int[scanner.nextInt()];
+            for (int j = 0; j < codes.length; j++) codes[j] = scanner.nextInt();
+            for (int j = 0; j < codes.length; j++) {
+                int up = 0;
+                int down = 0;
+                scanner.nextInt(); //discard
+                String operations = scanner.next();
+                for (char op : operations.toCharArray()) {
+                    if (op == 'U') up++;
+                    else down++;
+                }
+                //doing down - up instead of up - down because we have to go to past
+                if (codes[j] + (down - up) < 0) codes[j] += 10;
+                codes[j] += down - up;
+                codes[j] %= 10;
+            }
+
+            for (int code : codes) System.out.printf("%d ", code);
+            System.out.println();
+        }
+
+        scanner.close();
+    }
+}

@@ -1,0 +1,26 @@
+//https://codeforces.com/problemset/problem/978/B
+//time: O(n)
+//space: O(1)
+
+import java.util.Scanner;
+
+public class Main {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        scanner.nextInt(); //discard, because its java and we know string length :)
+        String str = scanner.next();
+        int consecutiveX = 0;
+        int changes = 0;
+        for (int ch : str.toCharArray()) {
+            if (ch != 'x') {
+                changes += Math.max(consecutiveX - 2, 0);
+                consecutiveX = 0;
+            } else consecutiveX++;
+        }
+        changes += Math.max(consecutiveX - 2, 0);
+        System.out.println(changes);
+        scanner.close();
+    }
+
+}
