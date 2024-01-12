@@ -1,0 +1,34 @@
+//https://codeforces.com/contest/1811/problem/A
+//time: O(n)
+//space: O(1)
+
+import java.util.Scanner;
+
+public class GfG {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int numTets = scanner.nextInt();
+
+        for (int i = 0; i < numTets; i++) {
+            scanner.nextInt();
+            //not taking input as integer to prevent complexity of extracting digit
+            char k = scanner.next().charAt(0);
+            String input = scanner.next();
+
+            for (int j = 0; j < input.length(); j++) {
+                if (k > input.charAt(j)) {
+                    System.out.print(k);
+                    k = '9' - 10; //so k won't be greater than any number
+                }
+                System.out.print(input.charAt(j));
+            }
+            if (k != '9' - 10)
+                System.out.print(k);
+            System.out.println();
+        }
+
+        scanner.close();
+    }
+
+}

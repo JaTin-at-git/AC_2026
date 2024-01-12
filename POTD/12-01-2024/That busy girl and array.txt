@@ -1,0 +1,44 @@
+//https://codeforces.com/contest/1822/problem/B
+
+//time: O(n)
+//space: O(1)
+
+
+import java.util.Scanner;
+
+public class GfG {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int numTests = scanner.nextInt();
+
+        for (int i = 0; i < numTests; i++) {
+            long n = scanner.nextInt();
+
+            //answer must be among product of two smallest or two largest number
+
+            long fpl = Long.MIN_VALUE;
+            long spl = Long.MIN_VALUE;
+            long fns = Long.MAX_VALUE;
+            long sns = Long.MIN_VALUE;
+
+            for (int j = 0; j < n; j++) {
+                long input = scanner.nextLong();
+                if (fpl < input) {
+                    spl = fpl;
+                    fpl = input;
+                } else if (spl < input) {
+                    spl = input;
+                }
+                if (fns > input) {
+                    sns = fns;
+                    fns = input;
+                } else if (sns > input) {
+                    sns = input;
+                }
+            }
+            System.out.println(Math.max(fpl * spl, fns * sns));
+        }
+
+        scanner.close();
+    }
+}
