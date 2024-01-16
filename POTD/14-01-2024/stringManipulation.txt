@@ -1,0 +1,21 @@
+//https://codeforces.com/problemset/problem/118/A
+//time: O(n)
+//space: O(1)
+
+import java.util.Scanner;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.List;
+
+
+public class GFG {
+
+    public static void main(String[] args) {
+        Set<Character> vovels = new HashSet<>(List.of('a', 'e', 'i', 'o', 'u', 'y', 'A', 'E', 'I', 'O', 'U', 'Y'));
+        Scanner scanner = new Scanner(System.in);
+        String input = scanner.next();
+        for (char ch : input.toCharArray())
+            if (!vovels.contains(ch)) System.out.print("." + Character.toLowerCase(ch));
+    }
+
+}

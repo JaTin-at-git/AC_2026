@@ -1,0 +1,22 @@
+//https://codeforces.com/problemset/problem/1672/A
+//time: O(n)
+//space: O(1)
+
+import java.util.Scanner;
+
+public class GfG {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int numTests = scanner.nextInt();
+
+        for (int i = 0; i < numTests; i++) {
+            int n = scanner.nextInt();
+            int winner = 0;
+            for (int j = 0; j < n; j++) winner = (winner + (scanner.nextInt() - 1) % 2) % 2;
+            if (winner == 0) System.out.println("maomao90");
+            else System.out.println("errorgorn");
+        }
+        scanner.close();
+    }
+
+}
