@@ -1,0 +1,26 @@
+//https://leetcode.com/problems/contains-duplicate-ii/description/
+//time: O(n)
+//space: O(n)
+
+
+import java.util.HashMap;
+import java.util.Map;
+
+public class GFG {
+
+    public static boolean containsNearbyDuplicate(int[] arr, int k) {
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int i = 0; i < arr.length; i++) {
+            int prevIndex = map.getOrDefault(arr[i], -1);
+            if (prevIndex != -1 && i - prevIndex <= k) return true;
+            map.put(arr[i], i);
+        }
+        return false;
+    }
+
+    public static void main(String[] args) {
+        int arr[] = {1, 2, 3, 3, 5, 1};
+        System.out.println(containsNearbyDuplicate(arr, 0));
+    }
+
+}
