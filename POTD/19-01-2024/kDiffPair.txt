@@ -1,0 +1,28 @@
+//https://leetcode.com/problems/count-number-of-pairs-with-absolute-difference-k/
+//time: O(nlogn)
+//space: O(1)
+
+
+import java.util.Arrays;
+
+public class GfG {
+
+    public static int countKDifference(int[] nums, int k) {
+        int count = 0;
+        Arrays.sort(nums); //nlogn
+        int freq[] = new int[101]; //O(1)
+        for (int el : nums) freq[el] += 1;
+
+        for (int i = 0; i < nums.length - 1; i++) { //n.logn
+            int bisIdx = Arrays.binarySearch(nums, i + 1, nums.length, k + nums[i]);
+            count += bisIdx >= 0 ? freq[nums[bisIdx]] : 0;
+        }
+
+        return count;
+    }
+
+    public static void main(String[] args) {
+        int nums[] = {10,2,10,9,1,6,8,9,2,8};
+        System.out.println(countKDifference(nums, 5));
+    }
+}

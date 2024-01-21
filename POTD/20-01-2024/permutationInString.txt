@@ -1,0 +1,45 @@
+//https://leetcode.com/problems/permutation-in-string/description/
+//time: O(n)
+//space: O(n)
+
+import java.util.HashSet;
+import java.util.Set;
+
+public class GfG {
+
+    public static boolean checkInclusion(String s1, String s2) {
+        //plan is to create an array of size 26, each index mapped to alphabet of s1
+        //in another set store indexes that need to be checked
+        int s1Freq[] = new int[26];
+        Set<Integer> set = new HashSet<>();
+
+        for (char el : s1.toCharArray()) {
+            int i = el - 'a';
+            set.add(i);
+            s1Freq[i] += 1;
+        }
+
+        //then for substring of length s1.length of s2, create an array of 26 alphabets
+        // and check only the indexes that are there in the set
+        int s2Freq[] = new int[26];
+        int k = s1.length();
+        for (int i = 0; i < s2.length(); i++) {
+            if (i >= k) s2Freq[s2.charAt(i - k) - 'a'] -= 1;
+            int c = s2.charAt(i) - 'a';
+            s2Freq[c] += 1;
+            if (i < k - 1) continue;
+            boolean containsPermutation = true;
+            for (int idx : set) {
+                if (s1Freq[idx] != s2Freq[idx]) containsPermutation = false;
+                if (!containsPermutation) break;
+            }
+            if (containsPermutation) return true;
+        }
+        return false;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(checkInclusion("ab", "bb"));
+    }
+
+}

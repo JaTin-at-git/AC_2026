@@ -1,0 +1,33 @@
+//https://leetcode.com/problems/maximize-the-confusion-of-an-exam/description/
+//time: O(n)
+//space: O(1)
+
+
+import java.util.Arrays;
+
+public class GfG {
+
+    private static int helper(String answerKey, int k, char tf) {
+        int i = 0;
+        int j = -1;
+        int max = Integer.MIN_VALUE;
+
+        while (i < answerKey.length()) {
+            if (answerKey.charAt(i) != tf) k--;
+            while (k < 0) if (answerKey.charAt(++j) != tf) k++;
+            max = Math.max(max, i - j);
+            i++;
+        }
+
+        return max;
+    }
+
+    public static int maxConsecutiveAnswers(String answerKey, int k) {
+        return Math.max(helper(answerKey, k, 'T'), helper(answerKey, k, 'F'));
+    }
+
+    public static void main(String[] args) {
+        System.out.println(maxConsecutiveAnswers("TTFTTFTTTTFTFTTTFT", 5));
+    }
+
+}
