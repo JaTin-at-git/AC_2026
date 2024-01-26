@@ -1,0 +1,76 @@
+//https://leetcode.com/problems/heaters/
+//time: O(nLog(n))
+//space: O(n)
+
+import java.util.ArrayList;
+import java.util.Arrays;
+
+public class GfG {
+
+    public static int findRadius(int[] houses, int[] heaters) {
+        Arrays.sort(houses);
+        Arrays.sort(heaters);
+
+        ArrayList<Integer> al = new ArrayList<>();
+        int i = 0;
+        int j = 0;
+        while (i != houses.length && j != heaters.length) {
+            if (houses[i] == heaters[j]) {
+                al.add(-heaters[j]);
+                i++;
+                j++;
+            } else if (houses[i] < heaters[j]) al.add(houses[i++]);
+            else al.add(-heaters[j++]);
+        }
+
+        while (i < houses.length) al.add(houses[i++]);
+        while (j < heaters.length) al.add(-heaters[j++]);
+
+        int pre[] = new int[al.size()];
+        int post[] = new int[al.size()];
+
+        int closestHeater = 1;
+        for (i = 0; i < al.size(); i++) {
+            if (closestHeater > 0 && al.get(i) > 0) {
+                pre[i] = Integer.MAX_VALUE;
+                continue;
+            }
+            if (al.get(i) < 0) {
+                closestHeater = al.get(i);
+                pre[i] = 0;
+            } else {
+                pre[i] = al.get(i) + closestHeater;
+            }
+        }
+        closestHeater = 1;
+        for (i = al.size() - 1; i >= 0; i--) {
+            if (closestHeater > 0 && al.get(i) > 0) {
+                post[i] = Integer.MAX_VALUE;
+                continue;
+            }
+            if (al.get(i) < 0) {
+                closestHeater = al.get(i);
+                post[i] = 0;
+            } else {
+                post[i] = -(al.get(i) + closestHeater);
+            }
+        }
+//
+//        System.out.println(al);
+//        System.out.println(Arrays.toString(pre));
+//        System.out.println(Arrays.toString(post));
+
+        int min = Integer.MIN_VALUE;
+        for (int k = 0; k < pre.length; k++)
+            min = Math.max(Math.min(pre[k], post[k]), min);
+
+        return min;
+    }
+
+    public static void main(String[] args) {
+        int houses[] = {1, 2, 3, 4, 30};
+        int heaters[] = {1, 4, 5};
+        System.out.println(findRadius(houses, heaters));
+    }
+
+}
