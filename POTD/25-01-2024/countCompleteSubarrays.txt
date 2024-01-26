@@ -1,0 +1,26 @@
+//https://leetcode.com/problems/count-complete-subarrays-in-an-array/description/
+//time: O(n)
+//space: O(n)
+
+  public int countCompleteSubarrays(int[] nums) {
+        HashMap<Integer, Integer> map = new HashMap<>();
+        
+        HashSet<Integer> set = new HashSet<>();
+        for(int j = 0; j<nums.length; j++) set.add(nums[j]);
+        int distEl = set.size();
+        int count = 0;
+
+        int i = 0;
+        for(int j = 0; j<nums.length; j++){
+            map.put(nums[j],map.getOrDefault(nums[j],0)+1);
+            while(map.size()==distEl){
+                count+=1+(nums.length-1-j);
+                map.put(nums[i],map.get(nums[i])-1);
+                map.remove(nums[i],0);
+                i++;
+            }
+            
+        }
+        return count;
+    }
+

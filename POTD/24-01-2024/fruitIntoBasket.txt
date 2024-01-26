@@ -1,0 +1,78 @@
+//https://leetcode.com/problems/fruit-into-baskets/description/
+//time: O(n)
+//space: O(1) ??
+
+import java.util.HashMap;
+
+public class GfG {
+    //slower 53ms but easy to understand
+
+
+    //faster 12ms but complex
+    public int totalFruit2(int[] fruits) {
+        HashMap<Integer, Integer> map = new HashMap<>();
+        int max = Integer.MIN_VALUE;
+        int current = 0;
+        int i = 0;
+        for (int j = 0; j < fruits.length; j++) {
+            map.put(fruits[j], map.getOrDefault(fruits[j], 0) + 1);
+            current++;
+            while (map.size() > 2) {
+                map.put(fruits[i], map.getOrDefault(fruits[i], 0) - 1);
+                map.remove(fruits[i], 0);
+                i++;
+                current--;
+            }
+            max = Math.max(max, current);
+        }
+        return max;
+    }
+
+    public static int totalFruit(int[] fruits) {
+
+        int basket[][] = {{-1, 0}, {-1, 0}};
+
+        int max = 0;
+        int current = 0;
+        int i = 0;
+
+        for (int j = 0; j < fruits.length; j++) {
+            //if by adding this fruit basketSize will be greater than 2, decrease size
+            if (basket[0][0] != -1 && basket[1][0] != -1 && basket[0][0] != fruits[j] && basket[1][0] != fruits[j]) {
+                outer:
+                while (true) for (int k = 0; k < 2; k++)
+                    if (basket[k][0] == fruits[i]) {
+                        basket[k][1] -= 1;
+                        i++;
+                        current--;
+                        if (basket[k][1] == 0) {
+                            basket[k][0] = -1;
+                            basket[k][1] = 0;
+                            break outer;
+                        }
+                    }
+            }
+
+            //add fruit in basket
+            for (int k = 0; k < 2; k++) {
+                if (basket[k][0] == -1 || basket[k][0] == fruits[j]) {
+                    basket[k][0] = fruits[j];
+                    basket[k][1]++;
+                    current++;
+                    break;
+                }
+            }
+
+            //get and store the max count
+            max = Math.max(max, current);
+        }
+
+        return max;
+    }
+
+    public static void main(String[] args) {
+        int arr[] = {1, 2, 3, 2, 2};
+        System.out.println(totalFruit(arr));
+    }
+
+}

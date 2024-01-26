@@ -1,0 +1,34 @@
+//https://leetcode.com/problems/sort-colors/description/
+//time: O(n)
+//space: O(1)
+
+import java.util.Arrays;
+
+public class GfG {
+
+    private static void swap(int arr[], int i, int j) {
+        int temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
+    }
+
+    public static void sortColors(int[] nums) {
+        int i = 0;
+        int j = nums.length - 1;
+
+        for (int k = 0; k <= j; k++) {
+            //put 0 at i, i++
+            //do not alter position of 1
+            //put 2 at j, j--
+            if (nums[k] == 0) swap(nums, k, i++);
+            else if (nums[k] == 2) swap(nums, k--, j--);
+        }
+    }
+
+    public static void main(String[] args) {
+        int arr[] = {0, 0,0,0,0,2,2,1};
+        sortColors(arr);
+        System.out.println(Arrays.toString(arr));
+    }
+
+}
