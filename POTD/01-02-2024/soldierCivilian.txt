@@ -1,0 +1,44 @@
+//https://leetcode.com/problems/the-k-weakest-rows-in-a-matrix/
+//time: nLog(m) + nLog(n) + k
+//space: n + k 
+
+//for array of size n*m
+
+class Solution {
+    private class Pair{
+        int index;
+        int power;
+        Pair(int index, int power){
+            this.index = index;
+            this.power = power;
+        }
+    }
+
+    private int getPower(int arr[]){
+        int l = 0;
+        int h= arr.length-1;
+        while(l<=h){
+            int mid=(l+h)/2;
+            if(arr[mid]==1) l=mid+1;
+            else h=mid-1;
+        }
+        return h+1;
+    }
+
+    public int[] kWeakestRows(int[][] mat, int k) {
+        Pair data[] = new Pair[mat.length];
+        for(int i=0; i<mat.length; i++)
+            data[i]=new Pair(i,getPower(mat[i]));
+
+        Arrays.sort(data,(a,b)->{
+            if(a.power==b.power) return a.index-b.index;
+            else return a.power-b.power;
+        });
+
+        int res[] = new int[k];
+        for(int i = 0; i<k; i++)
+            res[i]=data[i].index;       
+
+        return res;
+    }
+}

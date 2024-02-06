@@ -1,0 +1,28 @@
+//https://leetcode.com/problems/find-target-indices-after-sorting-array/
+//time: log(n) + k where k is number of times target occured
+//space: O(1)
+
+
+class Solution {
+    public List<Integer> targetIndices(int[] nums, int target) {
+        Arrays.sort(nums);
+        
+        int l = 0;
+        int h = nums.length-1;
+
+        while(l<=h){
+            int mid = (h+l)/2;
+            if(nums[mid]<target) l=mid+1;
+            else h=mid-1;
+        }
+
+        //we can check the last index where targer is found using BS 
+        //but we have to eventually use a for loop to insert elements into the list
+        //so simply use the loop
+        ArrayList<Integer> res = new ArrayList<>();
+        while(l<nums.length && nums[l]==target){
+            res.add(l++);
+        }
+        return res;
+    }
+}

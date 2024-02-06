@@ -1,0 +1,43 @@
+//https://codeforces.com/problemset/problem/1915/C
+//time: log(n) for sum=n
+//space: 1
+
+import java.util.Scanner;
+
+public class GfG {
+
+    static int getSqureRoot(long n) {
+        int l = 1;
+        int h = (int) Math.min((long) 1e9, n);
+        while (l <= h) {
+            int mid = (h - l) / 2 + l;
+            if ((long) mid * mid <= n) l = mid + 1;
+            else h = mid - 1;
+        }
+        return h;
+    }
+
+    public static void main(String[] args) {
+
+        Scanner scanner = new Scanner(System.in);
+        int t = scanner.nextInt();
+        while (t-- > 0) {
+            int n = scanner.nextInt();
+            long sum = 0;
+            for (int i = 0; i < n; i++) {
+                sum += scanner.nextInt();
+//                System.out.println(i);
+            }
+//            System.out.println(sum);
+            int meow = getSqureRoot(sum);
+//            System.out.println(meow);
+            if ((long) meow * meow == sum) System.out.println("Yes");
+            else System.out.println("No");
+
+        }
+
+        scanner.close();
+
+    }
+
+}

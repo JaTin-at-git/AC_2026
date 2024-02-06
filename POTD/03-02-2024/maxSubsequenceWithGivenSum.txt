@@ -1,0 +1,33 @@
+//https://leetcode.com/problems/longest-subsequence-with-limited-sum/description/
+//time: nLog(n) + mLog(n)
+//space: O(1)
+
+import java.util.Arrays;
+
+public class GfG {
+    static public int[] answerQueries(int[] nums, int[] queries) {
+        Arrays.sort(nums);
+        for (int i = 1; i < nums.length; i++) {
+            nums[i] = nums[i] + nums[i - 1];
+        }
+
+        int res[] = new int[queries.length];
+        for (int i = 0; i < queries.length; i++) {
+            int l = 0;
+            int h = nums.length;
+            while (l <= h) {
+                int mid = (h + l) / 2;
+                if (nums[mid] <= queries[i]) l = mid + 1;
+                else h = mid - 1;
+            }
+            res[i] = l;
+        }
+        return res;
+    }
+
+    public static void main(String[] args) {
+        int nums[] = {736411, 184882, 914641, 37925, 214915};
+        int queries[] = {331244, 273144, 118983, 118252, 305688, 718089, 665450};
+        System.out.println(Arrays.toString(answerQueries(nums, queries)));
+    }
+}

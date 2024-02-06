@@ -1,0 +1,27 @@
+//https://leetcode.com/problems/single-element-in-a-sorted-array/submissions/
+//time: log(n)
+//space: O(1) 
+
+class Solution {
+    public int singleNonDuplicate(int[] arr) {
+        
+        int l = 0;
+        int h = arr.length;
+
+        while(l<=h){
+            int mid = (h+l)/2;
+            int xor = 0;
+            if((mid&1)==1) xor = arr[mid]^arr[mid-1];
+            else{
+                xor = arr[mid];
+                if(mid+1<arr.length) xor^=arr[mid+1];
+            }
+
+            if(xor==0) l=mid+1;
+            else h=mid-1;
+        }
+
+        return arr[l];
+
+    }
+}

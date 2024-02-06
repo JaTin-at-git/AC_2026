@@ -1,0 +1,28 @@
+//https://leetcode.com/problems/arranging-coins/description/
+//time: log(n)
+//space: 1
+
+
+class GFG {
+
+    private static long getCount(int n) {
+        return (long) (n) * (n + 1) / 2;
+    }
+
+    public static int arrangeCoins(int n) {
+        int l = 0;
+        int h = (int) Math.ceil((Math.sqrt(1 + 8L * n) - 1) / 2); //floor is literally the answer, but whatever
+
+        while (l <= h) {
+            int mid = (h + l) / 2;
+            if (getCount(mid) <= n) l = mid + 1;
+            else h = mid - 1;
+        }
+        return h;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(arrangeCoins(((1 << 31) - 1)));
+    }
+
+}
