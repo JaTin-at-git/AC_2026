@@ -1,0 +1,29 @@
+//https://leetcode.com/problems/find-the-smallest-divisor-given-a-threshold/description/
+//time: log(n).n
+//space: 1
+
+class Solution {
+
+    private int getSum(int arr[], int divisor, int threshold){
+        int sum = 0;
+        for(int el: arr){
+            sum+=(int)Math.ceilDiv(el,divisor);
+            if(sum>threshold) return sum;
+        }
+        return sum;
+    }
+
+    public int smallestDivisor(int[] arr, int threshold) {
+        int l = 1;
+        int h = (int) 1e6;
+
+        while(l<=h){
+            int mid = (l+h)/2;
+            if(getSum(arr, mid, threshold)>threshold) l=mid+1;
+            else h=mid-1;
+        }
+
+        return l;
+
+    }
+}
