@@ -1,0 +1,10 @@
+//https://leetcode.com/problems/delete-node-in-a-linked-list/description/?envType=list&envId=rrs3r4z6
+//time: 1
+//space: 1
+
+class Solution {
+    public void deleteNode(ListNode node) {
+        node.val=node.next.val;
+        node.next=node.next.next;
+    }
+}

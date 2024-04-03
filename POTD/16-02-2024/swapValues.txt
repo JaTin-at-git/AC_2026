@@ -1,0 +1,25 @@
+//https://leetcode.com/problems/swapping-nodes-in-a-linked-list/?envType=list&envId=rrs3r4z6
+//time: n
+//space: 1
+
+class Solution {
+    public ListNode swapNodes(ListNode head, int k) {
+        //get the kth node from start
+        ListNode first = head;
+        for(int i=1; i<k; i++) first=first.next;
+
+        //get the kth node from last
+        ListNode last = head;
+        ListNode far = first.next;
+        while(far!=null){
+            last=last.next;
+            far=far.next;
+        }
+
+        int temp = first.val;
+        first.val=last.val;
+        last.val=temp;
+
+        return head;
+    }
+}

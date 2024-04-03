@@ -1,0 +1,31 @@
+//https://leetcode.com/problems/odd-even-linked-list/
+//time: n
+//space: 1
+
+class Solution {
+    public static ListNode oddEvenList(ListNode head) {
+        if (head == null || head.next == null) return head;
+
+        ListNode temp = head.next.next;
+        ListNode odd = head;
+        ListNode even = head.next;
+        ListNode ref = head.next;
+
+        int i = 1;
+        while (temp != null) {
+            if (i % 2 == 1) {
+                odd.next = temp;
+                odd = odd.next;
+            } else {
+                even.next = temp;
+                even = even.next;
+            }
+            i++;
+            temp = temp.next;
+        }
+        
+        even.next = null;
+        odd.next = ref;
+        return head;
+    }
+}

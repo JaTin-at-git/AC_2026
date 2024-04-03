@@ -1,0 +1,48 @@
+class Solution {
+
+    private int binarySearch(int arr[], int target) {
+        int l = 0;
+        int h = arr.length - 1;
+
+        while (l <= h) {
+            int mid = (h + l) / 2;
+            if (arr[mid] < target) l = mid + 1;
+            else h = mid - 1;
+        }
+
+        return l;
+    }
+
+
+    private boolean isPossible(int[] houses, int[] heaters, int range) {
+
+        for (int house : houses) {
+            int j = binarySearch(heaters, house);
+            boolean r1 = false;
+            boolean r2 = false;
+            if (j < heaters.length) r1 = (house <= heaters[j] && house >= heaters[j] - range);
+            if (j > 0) r2 = (house > heaters[j - 1] && house <= heaters[j - 1] + range);
+            if (!(r1 || r2)) return false;
+        }
+
+        return true;
+    }
+
+    public int findRadius(int[] houses, int[] heaters) {
+        Arrays.sort(houses);
+        Arrays.sort(heaters);
+
+        int l = 0;
+        int h = (int) 1e9;
+
+        while (l <= h) {
+            int range = (l + h) / 2;
+            if (isPossible(houses, heaters, range)) h = range - 1;
+            else l = range + 1;
+            //            System.out.println(range);
+        }
+
+        return l;
+
+    }
+}

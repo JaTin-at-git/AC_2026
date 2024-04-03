@@ -1,0 +1,27 @@
+//https://leetcode.com/problems/merge-k-sorted-lists/
+//time: mn + mn log(mn)
+//space: mn
+
+import java.util.*;
+class Solution {
+    public ListNode mergeKLists(ListNode[] lists) {
+        //there are better approaches :)
+        //add all elements in arrayList, sort and then enter into a linked list
+        ArrayList<ListNode> al = new ArrayList<>();
+
+        for(ListNode ln : lists){
+            while(ln!=null){
+                al.add(ln);
+                ln=ln.next;
+            }
+        }
+
+        Collections.sort(al,(a,b)->a.val-b.val);
+
+        for(int i=1; i<al.size(); i++){
+            al.get(i-1).next = al.get(i);
+        }
+
+        return al.isEmpty()?null:al.get(0);
+    }
+}

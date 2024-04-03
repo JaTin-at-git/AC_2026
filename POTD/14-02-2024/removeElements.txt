@@ -1,0 +1,14 @@
+//https://leetcode.com/problems/remove-linked-list-elements/
+//time: n
+//space: n (stack size)
+
+
+class Solution {
+       
+    public ListNode removeElements(ListNode current, int val) {
+        if(current==null) return null;
+        current.next = removeElements(current.next, val);
+        if(current.val==val) return current.next;
+        return current;
+    }
+}

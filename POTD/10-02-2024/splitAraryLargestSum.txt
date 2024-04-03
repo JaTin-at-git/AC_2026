@@ -1,0 +1,44 @@
+//https://leetcode.com/problems/split-array-largest-sum/
+//time: n+log(sum(arr))
+//space: 1
+
+class Solution {
+
+    private static boolean isPossible(int arr[], int k, int limit) {
+        //is it possible to partition arr into at most k parts such that sum of each part is
+        // less than or equal to limit ?
+        int partitions = 0;
+        int sum = 0;
+        for (int el : arr) {
+            if (sum + el >= limit) {
+                partitions++;
+                sum = sum + el == limit ? 0 : el;
+            } else sum += el;
+//            System.out.println(sum + " " + partitions);
+            if (partitions > k) return false;
+        }
+        if (sum != 0) partitions++;
+        return partitions <= k;
+    }
+
+    public static int splitArray(int[] nums, int k) {
+        int l = Integer.MIN_VALUE;
+        int h = 0;
+
+        for (int el : nums) {
+            l = Math.max(l, el);
+            h += el;
+        }
+
+        while (l <= h) {
+            int mid = (h + l) / 2;
+            boolean res = isPossible(nums, k, mid);
+//            System.out.println(mid + ": " + res);
+            if (res) h = mid - 1;
+            else l = mid + 1;
+//            System.out.println();
+        }
+
+        return l;
+    }
+}

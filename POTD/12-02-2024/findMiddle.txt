@@ -1,0 +1,17 @@
+//https://leetcode.com/problems/middle-of-the-linked-list/submissions/1179024404/?envType=list&envId=rrs3r4z6
+//time: n/2
+//space: 1
+
+class Solution {
+    public ListNode middleNode(ListNode head) {
+        ListNode slow = head;
+        ListNode fast = head;
+
+        while(fast!=null && fast.next!=null){
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+
+        return slow;
+    }
+}
