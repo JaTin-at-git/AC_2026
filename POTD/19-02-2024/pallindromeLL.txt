@@ -1,0 +1,53 @@
+//https://leetcode.com/problems/palindrome-linked-list/
+//time: n/2 + n/2 + n/2
+//space: 1
+
+class Solution {
+
+    private ListNode reverse(ListNode head, ListNode end){
+        ListNode prev = null;
+        ListNode temp = head;
+
+        while(temp!=end){
+            ListNode next = temp.next;
+            temp.next = prev;
+            prev = temp;
+            temp = next;
+        }
+        
+        return prev;
+    }
+
+    private ListNode getMiddle(ListNode head){
+        ListNode slow = head;
+        ListNode prev = head;
+        ListNode fast = head;
+
+        while(fast!=null && fast.next!=null){
+            prev = slow;
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+
+        if(fast!=null && fast.next==null) {
+            prev.next = slow.next;
+            return slow.next;
+        }
+        return slow;
+    }
+
+    public boolean isPalindrome(ListNode head) {
+        if(head.next==null) return true;
+        ListNode mid = getMiddle(head);
+        ListNode rev = reverse(head, mid);
+
+        while(rev!=null){
+            // System.out.println(" against ")
+            if(rev.val!=mid.val) return false;
+            rev = rev.next;
+            mid = mid.next;
+        }
+
+        return true;
+    }
+}

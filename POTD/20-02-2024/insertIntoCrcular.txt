@@ -1,0 +1,32 @@
+//https://www.geeksforgeeks.org/problems/sorted-insert-for-circular-linked-list/1
+//time: n
+//space: 1
+
+class Solution {
+    
+    private void addNode(Node node, int data){
+        Node newNode = new Node(node.data);
+        newNode.next = node.next;
+        node.next = newNode;
+        node.data = data;
+    }
+    
+    public Node sortedInsert(Node head, int data) {
+        if(head==null) return new Node(data);
+
+        Node temp = head;
+        
+        while(temp!=null){
+            if(temp.data>=data){
+                addNode(temp,data);
+                break;
+            }else if(temp.next==head){
+                addNode(head,data);
+                break;
+            }
+            temp=temp.next;
+        }
+
+        return head.data>head.next.data?head.next:head;
+    }
+}
