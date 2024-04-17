@@ -1,0 +1,18 @@
+//time: log_4(n)
+//space: log_4(n)
+//https://leetcode.com/problems/power-of-four/
+
+class Solution {
+    int n;
+
+    public boolean helper(int pre){
+        if(pre==n) return true;
+        else if(pre>n) return false;
+        return helper(pre*4); 
+    }
+
+    public boolean isPowerOfFour(int n) {
+        this.n = n;
+        return helper(1);
+    }
+}

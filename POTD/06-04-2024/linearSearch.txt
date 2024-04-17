@@ -1,0 +1,19 @@
+//time: n
+//space: n (Stack)
+//https://www.geeksforgeeks.org/problems/searching-a-number0324/1
+
+class Solution {
+    static int arr[];
+    
+    private static int helper(int i, int k){
+        if (i>=arr.length) return Integer.MIN_VALUE;
+        if (arr[i]==k) return 1;
+        return 1+helper(i+1,k);
+    }
+    
+    public static int search(int n, int k, int[] arr) {
+        Solution.arr = arr;
+        int res = helper(0,k);
+        return res>0?res:-1;
+    }
+}

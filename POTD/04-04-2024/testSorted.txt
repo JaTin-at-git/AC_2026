@@ -1,0 +1,13 @@
+//time: n
+//space: n
+//link: https://www.geeksforgeeks.org/problems/check-if-an-array-is-sorted0701/1
+
+
+class Solution {
+    
+    boolean arraySortedOrNot(int[] arr, int n) {
+        if(n==0) return true;
+        if(n==arr.length) return arraySortedOrNot(arr,n-1);
+        return arr[n-1]<=arr[n] && arraySortedOrNot(arr,n-1);
+    }
+}

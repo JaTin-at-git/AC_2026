@@ -1,0 +1,17 @@
+//time: n
+//space: n (stack)
+//https://www.geeksforgeeks.org/problems/sum-of-array2326/1
+
+class Solution {
+    int arr[];
+    
+    int sum(int n, int pre){
+        if(n==-1) return pre;
+        return sum(n-1, pre+arr[n]);
+    }
+    
+    int sum(int arr[], int n) {
+        this.arr = arr;
+        return sum(n-1, 0);
+    }
+}

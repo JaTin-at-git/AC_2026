@@ -1,0 +1,20 @@
+//time:
+//space:
+//https://www.geeksforgeeks.org/problems/palindrome0746/1
+
+class Solution
+{
+    public String str;
+    
+    private boolean helper(int i){
+        if(i==0) return true;
+        return str.charAt(i-1)==str.charAt(str.length()-i) && helper(i-1); 
+    }
+    
+    public String is_palindrome(int n)
+    {
+        String nAsString = n+"";
+        this.str = nAsString;
+        return helper(str.length()/2)?"Yes":"No";
+    }
+}

@@ -1,0 +1,43 @@
+//time:3^n
+//space: n (stack) + answer
+//https://leetcode.com/problems/letter-combinations-of-a-phone-number/?envType=list&envId=o7km4wrg
+
+
+class Solution {
+    private static HashMap<Character,String> map;
+
+    private static void initMap(){
+        map=new HashMap<>();
+        map.put('0', "0");
+        map.put('1', "1");
+        map.put('2', "abc");
+        map.put('3', "def");
+        map.put('4', "ghi");
+        map.put('5', "jkl");
+        map.put('6', "mno");
+        map.put('7', "pqrs");
+        map.put('8', "tuv");
+        map.put('9', "wxyz");
+    }
+
+    private static void rec(String s, int i, StringBuilder pre, List<String> res){
+        if(i==s.length()) {
+            res.add(pre.toString());
+            return;
+        }
+        
+        for(char ch: map.get(s.charAt(i)).toCharArray()){
+            pre.append(ch);
+            rec(s,i+1,pre,res);
+            pre.deleteCharAt(pre.length() - 1);
+        }
+    }
+ 
+    public static List<String> letterCombinations(String str) {
+        List<String> res = new ArrayList<>();
+        if(str.isEmpty()) return res;
+        initMap();
+        rec(str,0,new StringBuilder(),res);
+        return res;
+    }
+}

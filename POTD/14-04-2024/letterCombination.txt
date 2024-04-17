@@ -1,0 +1,41 @@
+//time: 2^n
+//space: stack + answer
+//https://leetcode.com/problems/letter-case-permutation/
+
+class Solution {
+    List<String> res;
+    StringBuilder pre;
+    String s;
+
+    //for alphabets only
+    private char changeCase(char ch){
+        if(ch>='a' && ch<='z') return (char)(ch-('a'-'A'));
+        return (char)(ch+('a'-'A'));
+    }
+
+    private void helper(int i){
+        if(i==s.length()){
+            res.add(pre.toString());
+            return;
+        }
+
+        pre.append(s.charAt(i));
+        helper(i+1);
+        pre.deleteCharAt(pre.length()-1);
+
+        if(s.charAt(i)>'9'){
+            pre.append(changeCase(s.charAt(i)));
+            helper(i+1);
+            pre.deleteCharAt(pre.length()-1);
+        }
+    }
+
+    public List<String> letterCasePermutation(String s) {
+        this.res = new ArrayList<String>();
+        this.s = s;
+        this.pre = new StringBuilder("");
+        helper(0);
+        return this.res;
+    }
+}
+
